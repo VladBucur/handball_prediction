@@ -82,6 +82,10 @@ venv.bak/
 *.xls
 *.xlsx
 
+# Word and PDF documents
+*.docx
+*.pdf
+
 # Jars
 *.jar
 
