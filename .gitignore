@@ -91,3 +91,7 @@ venv.bak/
 
 # Text files
 *.txt
+
+# Images
+*.jpeg
+*.png
