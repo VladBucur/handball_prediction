@@ -95,3 +95,6 @@ venv.bak/
 # Images
 *.jpeg
 *.png
+
+# Pickle files
+*.pkl
