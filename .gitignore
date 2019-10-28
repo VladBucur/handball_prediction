@@ -99,6 +99,7 @@ venv.bak/
 # Pickle files
 *.pkl
 
-# NN model files
-*.json
+# NN files
 *.hdf5
+*.json
+
