@@ -98,3 +98,7 @@ venv.bak/
 
 # Pickle files
 *.pkl
+
+# NN files
+*.hdf5
+*.json
