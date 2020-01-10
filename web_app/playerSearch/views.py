@@ -7,7 +7,7 @@ def searchView(request):
     except:
         return render(request, 'playerSearch.html', {"res":[]})
 
-    players_df = pd.read_csv('final_processed_data.csv')
+    players_df = pd.read_csv('../inputs/final_processed_data.csv')
     players_name_list = players_df['name'].unique()
 
     result_list = []
