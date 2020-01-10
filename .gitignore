@@ -102,4 +102,6 @@ venv.bak/
 # NN files
 *.hdf5
 *.json
+*.gif
+
 
