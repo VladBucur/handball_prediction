@@ -17,10 +17,20 @@ from django.contrib import admin
 from django.urls import path, re_path
 
 from home.views import homePage
+from createPlayerData.views import createPlayerDataView
+from createPlayerProfile.views import createPlayerProfileView
 from playerSearch.views import searchView
+from playerProfile.views import profileView
+from playerPrediction.views import predictionView
+from predictionResult.views import predictionResultView
 
 urlpatterns = [
     re_path(r'^$', homePage, name='home'),
+    re_path(r'^createPlayerData.*$', createPlayerDataView, name='createPlayerData'),
+    re_path(r'^createPlayerProfile.*$', createPlayerProfileView, name='createPlayerProfile'),
     re_path(r'^playerSearch.*$', searchView, name='playerSearch'),
+    re_path(r'^playerProfile.*$', profileView, name='playerProfile'),
+    re_path(r'^playerPrediction.*$', predictionView, name='playerPrediction'),
+    re_path(r'^predictionResult.*$', predictionResultView, name='predictionResult'),
     path('admin/', admin.site.urls)
 ]

@@ -4,7 +4,7 @@
 
     <head>
 
-        <title>Player Search Result</title>
+        <title>Prediction Page</title>
 
         <meta charset="UTF-8">
 
@@ -37,7 +37,8 @@
 
             <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm">
                 <ul class="navbar-nav" style="padding-left: 0px; margin: 0px;">
-                     <li class="nav-item">Your Search Results</li>
+                    {%csrf_token%}
+                     <li class="nav-item" value = "{{playerName}}"> {{playerName}}'s Profile</li>
                  </ul>
             </div>
 
@@ -57,26 +58,54 @@
 
         </nav>
 
-        {% if res%}
-            <form action="/playerProfile/" method = "POST">
+        <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
+
+                <ul class="navbar-nav" style="padding-left: 30px; margin: 0px; height: 80px;">
+                     <a class="nav-item" style="text-color:black">Player attributes</a>
+                </ul>
+
                 {%csrf_token%}
-                {% for x in res%}
-                    <br>
-                    <div class="player-profile-button" style="padding-left: 33%">
-                        <button class="btn btn-player form-control" style="padding-top: 2%; padding-bottom: 4%; background-color: white; font-size:2.7vh; width: 50%;" type = "submit" name = "player-name" value = "{{x}}">
-                            <i class="em em-handball"></i>{{x}}
-                        </button>
-                    </div>
+                {% for attribute in playerAttributes%}
+                    <a class="nav-item" style="text-color:black; padding-left: 100px;">{{attribute}}</a>
                 {%endfor%}
-            </form>
-        {%else%}
-        <div class="container justify-content-center align-items-center container-form">
-            <div class="no-results-button" style="padding-left: 33%">
                 <br>
-                <button class="btn btn-player form-control" style="padding-top: 2%; padding-bottom: 4%; background-color: white; font-size:2.7vh; width: 50%;">No results found</button>
-            </div>
+
         </div>
-        {%endif%}
+
+        <br>
+
+        <form action="/predictionResult/" method = "POST">
+            <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
+                {%csrf_token%}
+                <input type="hidden" name="player-name" value="{{playerName}}"/>
+                <input type="hidden" name="prediction-season" value="{{predictionSeason}}"/>
+                <button class="btn btn-model form-control" style="padding-top: 2%; padding-bottom: 4%; background-color: white; font-size:2.7vh; width: 100%;" type = "submit" name = "prediction-model" value="{{recommendedModel}}">
+                    <i class="em em-handball"></i>Recommended model: {{recommendedModel}}
+                </button>
+            </div>
+        </form>
+
+        <br>
+
+        <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
+                <ul class="navbar-nav" style="padding-left: 30px; margin: 0px;">
+                     <a class="nav-item" style="text-color:black">Select prediction model</a>
+                </ul>
+        </div>
+
+        <form action="/predictionResult/" method = "POST">
+            <input type="hidden" name="player-name" value="{{playerName}}"/>
+            <input type="hidden" name="prediction-season" value="{{predictionSeason}}"/>
+            {%csrf_token%}
+            {% for model in predictionModelsList%}
+                <br>
+                <div class="prediction-model-button" style="padding-left: 33%">
+                    <button class="btn btn-model form-control" style="padding-top: 2%; padding-bottom: 4%; background-color: white; font-size:2.7vh; width: 50%;" type = "submit" name = "prediction-model" value = "{{model}}">
+                        <i class="em em-handball"></i>{{model}}
+                    </button>
+                </div>
+            {%endfor%}
+        </form>
 
     </body>
 
