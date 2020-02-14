@@ -24,6 +24,7 @@ from playerSearch.views import searchView
 from playerProfile.views import profileView
 from playerPrediction.views import predictionView
 from predictionResult.views import predictionResultView
+from stats.views import statsView
 
 urlpatterns = [
     re_path(r'^$', homePage, name='home'),
@@ -34,5 +35,6 @@ urlpatterns = [
     re_path(r'^playerProfile.*$', profileView, name='playerProfile'),
     re_path(r'^playerPrediction.*$', predictionView, name='playerPrediction'),
     re_path(r'^predictionResult.*$', predictionResultView, name='predictionResult'),
+    re_path(r'^stats.*$', statsView, name='stats'),
     path('admin/', admin.site.urls)
 ]

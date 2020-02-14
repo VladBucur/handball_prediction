@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'playerSearch',
     'playerProfile',
     'playerPrediction',
-    'predictionResult'
+    'predictionResult',
+    'stats'
 ]
 
 MIDDLEWARE = [
