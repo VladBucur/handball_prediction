@@ -19,6 +19,7 @@ from django.urls import path, re_path
 from home.views import homePage
 from createPlayerData.views import createPlayerDataView
 from createPlayerProfile.views import createPlayerProfileView
+from createdPlayerPredictionResult.views import createdPlayerPredictionResultView
 from playerSearch.views import searchView
 from playerProfile.views import profileView
 from playerPrediction.views import predictionView
@@ -28,6 +29,7 @@ urlpatterns = [
     re_path(r'^$', homePage, name='home'),
     re_path(r'^createPlayerData.*$', createPlayerDataView, name='createPlayerData'),
     re_path(r'^createPlayerProfile.*$', createPlayerProfileView, name='createPlayerProfile'),
+    re_path(r'^createdPlayerPredictionResult.*$', createdPlayerPredictionResultView, name='createdPlayerPredictionResult'),
     re_path(r'^playerSearch.*$', searchView, name='playerSearch'),
     re_path(r'^playerProfile.*$', profileView, name='playerProfile'),
     re_path(r'^playerPrediction.*$', predictionView, name='playerPrediction'),

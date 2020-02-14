@@ -4,7 +4,7 @@
 
     <head>
 
-        <title>Create Player Profile</title>
+        <title>Created Player Prediction Result</title>
 
         <meta charset="UTF-8">
 
@@ -38,7 +38,7 @@
             <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm">
                 <ul class="navbar-nav" style="padding-left: 0px; margin: 0px;">
                     {%csrf_token%}
-                     <li class="nav-item" value = "{{playerName}}"> {{playerName}}'s Profile</li>
+                     <li class="nav-item" value = "{{playerName}}"> {{playerName}}'s Prediction Result</li>
                  </ul>
             </div>
 
@@ -59,63 +59,18 @@
         </nav>
 
         <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
-
-                <ul class="navbar-nav" style="padding-left: 30px; margin: 0px; height: 80px;">
-                     <a class="nav-item" style="text-color:black">Player attributes</a>
-                </ul>
-
-                {%csrf_token%}
-                {% for attribute in playerAttributes%}
-                    <a class="nav-item" style="text-color:black; padding-left: 100px;">{{attribute}}</a>
-                {%endfor%}
-                <br>
-
+            <ul class="navbar-nav" style="padding-left: 30px; margin: 0px; height: 110px;">
+                 <a class="nav-item" style="text-color:black">Prediction model: {{predictionModel}}</a>
+            </ul>
         </div>
-
-        <br>
-
-        <form action="/createdPlayerPredictionResult/" method = "POST">
-            <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
-                {%csrf_token%}
-                <input type="hidden" name="player-name" value="{{playerName}}"/>
-                <input type="hidden" name="position" value="{{playerPosition}}"/>
-                <input type="hidden" name="height" value="{{playerHeight}}"/>
-                <input type="hidden" name="matches-year1" value="{{matchesYear1}}"/>
-                <input type="hidden" name="goals-year1" value="{{goalsYear1}}"/>
-                <input type="hidden" name="matches-year2" value="{{matchesYear2}}"/>
-                <input type="hidden" name="goals-year2" value="{{goalsYear2}}"/>
-                <button class="btn btn-model form-control" style="padding-top: 2%; padding-bottom: 4%; background-color: white; font-size:2.7vh; width: 100%;" type = "submit" name = "prediction-model" value="{{recommendedModel}}">
-                    <i class="em em-handball"></i>Recommended model: {{recommendedModel}}
-                </button>
-            </div>
-        </form>
 
         <br>
 
         <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
-            <ul class="navbar-nav" style="padding-left: 30px; margin: 0px;">
-                 <a class="nav-item" style="text-color:black">Select prediction model</a>
+            <ul class="navbar-nav" style="padding-left: 30px; margin: 0px; height: 110px;">
+                 <a class="nav-item" style="text-color:black">Predicted goals per match: {{predictedValue}}</a>
             </ul>
         </div>
-
-        <form action="/createdPlayerPredictionResult/" method = "POST">
-            {%csrf_token%}
-            <input type="hidden" name="player-name" value="{{playerName}}"/>
-            <input type="hidden" name="position" value="{{playerPosition}}"/>
-            <input type="hidden" name="height" value="{{playerHeight}}"/>
-            <input type="hidden" name="matches-year1" value="{{matchesYear1}}"/>
-            <input type="hidden" name="goals-year1" value="{{goalsYear1}}"/>
-            <input type="hidden" name="matches-year2" value="{{matchesYear2}}"/>
-            <input type="hidden" name="goals-year2" value="{{goalsYear2}}"/>
-            {% for model in predictionModelsList%}
-                <br>
-                <div class="prediction-model-button" style="padding-left: 33%">
-                    <button class="btn btn-model form-control" style="padding-top: 2%; padding-bottom: 4%; background-color: white; font-size:2.7vh; width: 50%;" type = "submit" name = "prediction-model" value = "{{model}}">
-                        <i class="em em-handball"></i>{{model}}
-                    </button>
-                </div>
-            {%endfor%}
-        </form>
 
     </body>
 
