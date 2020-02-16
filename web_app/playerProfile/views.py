@@ -17,6 +17,7 @@ def profileView(request):
     data = player_data.merge(player_raw_data[['goals_per_match_year3', 'prediction_season']],
                              on='goals_per_match_year3', how='left')
 
-    predictionSeasonList = list(data['prediction_season'][~data['prediction_season'].isna()].values)
+    predictionSeasonList = list(data['prediction_season'][~data['prediction_season'].isna()].unique())
+    predictionSeasonList.sort()
 
     return render(request, 'playerProfile.html', {"playerName": playerName, "predictionSeasonList": predictionSeasonList})
