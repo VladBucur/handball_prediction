@@ -17,7 +17,8 @@ def createdPlayerPredictionResultView(request):
         goalsYear2 = request.POST['goals-year2']
         predictionModel = request.POST['prediction-model']
     except:
-        return render(request, 'createdPlayerPredictionResult.html', {"playerName": "", "predictionModel": "", "predictedValue": ""})
+        return render(request, 'createdPlayerPredictionResult.html', {"playerName": "", "predictionModel": "",
+                                                        "predictedValue": "",  "predictionModelDocumentationLink": ""})
 
     df = pd.DataFrame(columns = ['center', 'back', 'wing', 'line', 'height', 'matches_year1', 'goals_year1',
                                  'goals_per_match_year1', 'matches_year2', 'goals_year2', 'goals_per_match_year2'])
@@ -43,8 +44,6 @@ def createdPlayerPredictionResultView(request):
                     'matches_year1':int(matchesYear1), 'goals_year1':int(goalsYear1),
                     'goals_per_match_year1':goals_per_match_year1, 'matches_year2':int(matchesYear2),
                     'goals_year2':int(goalsYear2), 'goals_per_match_year2':goals_per_match_year2}, ignore_index=True)
-
-    print(df)
 
     X = df[['center', 'back', 'wing', 'line', 'height', 'matches_year1', 'goals_year1', 'goals_per_match_year1',
             'matches_year2', 'goals_year2', 'goals_per_match_year2']]
@@ -89,5 +88,22 @@ def createdPlayerPredictionResultView(request):
     elif predictionModel in ['Logistic Regression', 'Decision Tree Classifier', 'Random Forest Classifier']:
         predictedValue = int(predictedValue)
 
+    modelLinks = {}
+    modelLinks[
+        'Linear Regression'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html'
+    modelLinks['Lasso Regressor'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Lasso.html'
+    modelLinks['Ridge Regressor'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html'
+    modelLinks[
+        'Decision Tree Regressor'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html'
+    modelLinks[
+        'Random Forest Regressor'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html'
+    modelLinks['Neural Network'] = 'https://keras.io/getting-started/sequential-model-guide/'
+    modelLinks[
+        'Logistic Regression'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html'
+    modelLinks[
+        'Decision Tree Classifier'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html'
+    modelLinks[
+        'Random Forest Classifier'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html'
+
     return render(request, 'createdPlayerPredictionResult.html', {"playerName": playerName, "predictionModel": predictionModel,
-                                                     "predictedValue": predictedValue})
+                            "predictedValue": predictedValue, "predictionModelDocumentationLink": modelLinks[predictionModel]})

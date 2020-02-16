@@ -17,6 +17,16 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link type="text/css" href="{% static 'style/style.css' %}" rel="stylesheet"/>
         <link rel="icon" type="image/png" href="{% static 'images/handball_logo.png' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'images/players_by_field_position.png' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'images/matches_played_density_plot.png' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'images/goals_scored_density_plot.png' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'images/goals_scored_per_match_density_plot.png' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'images/goals_scored_boxplot_by_position.png' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'images/height_to_goals_per_match_catplot.png' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'images/correlation_matrix.png' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'images/regression_models_scores.png' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'images/NN_scores.png' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'images/classification_model_scores.png' %}"/>
 
     </head>
 
@@ -55,6 +65,40 @@
             </div>
 
         </nav>
+
+        <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
+            <ul class="navbar-nav" style="padding-left: 30px; margin: 0px; height: 110px;">
+                 <a class="nav-item" style="text-color:black">Feature statistics</a>
+            </ul>
+        </div>
+
+        <a class="navbar-brand justify-content-end align-items-center">
+            <img src="{% static 'images/players_by_field_position.png' %}" style="width:30%; padding-left: 80px;">
+            <img src="{% static 'images/matches_played_density_plot.png' %}" style="width:30%; padding-left: 80px;">
+            <img src="{% static 'images/goals_scored_density_plot.png' %}" style="width:30%; padding-left: 80px;">
+        </a>
+
+        <a class="navbar-brand justify-content-end align-items-center">
+            <img src="{% static 'images/goals_scored_per_match_density_plot.png' %}" style="width:30%; padding-left: 80px;">
+            <img src="{% static 'images/goals_scored_boxplot_by_position.png' %}" style="width:30%; padding-left: 80px;">
+            <img src="{% static 'images/height_to_goals_per_match_catplot.png' %}" style="width:25%; padding-left: 140px;">
+        </a>
+
+        <a class="navbar-brand justify-content-end align-items-center">
+            <img src="{% static 'images/correlation_matrix.png' %}" style="width:65%; padding-left: 400px;">
+        </a>
+
+        <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
+            <ul class="navbar-nav" style="padding-left: 30px; margin: 0px; height: 110px;">
+                 <a class="nav-item" style="text-color:black">Model prediction accuracy (R2 score)</a>
+            </ul>
+        </div>
+
+        <a class="navbar-brand justify-content-end align-items-center">
+            <img src="{% static 'images/regression_models_scores.png' %}" style="width:35%; padding-left: 80px;">
+            <img src="{% static 'images/NN_scores.png' %}" style="width:25%; padding-left: 80px;">
+            <img src="{% static 'images/classification_model_scores.png' %}" style="width:30%; padding-left: 80px;">
+        </a>
 
     </body>
 

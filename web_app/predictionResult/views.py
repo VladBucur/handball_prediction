@@ -11,7 +11,8 @@ def predictionResultView(request):
         predictionModel = request.POST['prediction-model']
     except:
         return render(request, 'predictionResult.html', {"playerName": "", "predictionSeason": "",
-                                                         "predictionModel": "", "predictedValue": "", "actualValue": ""})
+                                                         "predictionModel": "", "predictedValue": "", "actualValue": "",
+                                                         "predictionModelDocumentationLink": ""})
 
     players_df = pd.read_csv('../inputs/final_processed_data.csv')
     players_df = players_df[players_df['name'] == playerName]
@@ -69,6 +70,17 @@ def predictionResultView(request):
         actualValue = int(round(actualValue))
         predictedValue = int(predictedValue)
 
+    modelLinks = {}
+    modelLinks['Linear Regression'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html'
+    modelLinks['Lasso Regressor'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Lasso.html'
+    modelLinks['Ridge Regressor'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html'
+    modelLinks['Decision Tree Regressor'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html'
+    modelLinks['Random Forest Regressor'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html'
+    modelLinks['Neural Network'] = 'https://keras.io/getting-started/sequential-model-guide/'
+    modelLinks['Logistic Regression'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html'
+    modelLinks['Decision Tree Classifier'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html'
+    modelLinks['Random Forest Classifier'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html'
+
     return render(request, 'predictionResult.html', {"playerName": playerName, "predictionSeason": predictionSeason,
                             "predictionModel": predictionModel, "predictedValue": str(predictedValue),
-                            "actualValue": str(actualValue)})
+                            "actualValue": str(actualValue), "predictionModelDocumentationLink": modelLinks[predictionModel]})
