@@ -3,18 +3,46 @@ import pandas as pd
 
 def createPlayerProfileView(request):
 
+    def isInt(s):
+        try:
+            int(s)
+            return True
+        except ValueError:
+            return False
+
     try:
         playerName = request.POST['name']
         playerPosition = request.POST['position']
-        playerHeight = request.POST['height']
-        matchesYear1 = request.POST['matches-year1']
-        goalsYear1 = request.POST['goals-year1']
-        matchesYear2 = request.POST['matches-year2']
-        goalsYear2 = request.POST['goals-year2']
+        playerHeight = int(request.POST['height'])
+        matchesYear1 = int(request.POST['matches-year1'])
+        goalsYear1 = int(request.POST['goals-year1'])
+        matchesYear2 = int(request.POST['matches-year2'])
+        goalsYear2 = int(request.POST['goals-year2'])
+
+        if playerName == "" or playerPosition not in ['CENTER','BACK','WING','LINE']:
+            raise Exception
     except:
+        errorMessage = "Inputs not accepted" # default
+
+        if request.POST['name'] == "":
+            errorMessage =  "Invalid player name entered. This should be a non-empty string."
+        elif request.POST['position'] is None or request.POST['position'] not in ['CENTER','BACK','WING','LINE']:
+            errorMessage = "Invalid player position entered. This should be CENTER/BACK/WING/LINE."
+        elif not isInt(request.POST['height']):
+            errorMessage = "Invalid player height entered. This should be an integer (cm)."
+        elif not isInt(request.POST['matches-year1']):
+            errorMessage = "Invalid matches played 2 seasons ago entered. This should be an integer."
+        elif not isInt(request.POST['goals-year1']):
+            errorMessage = "Invalid goals scored 2 seasons ago entered. This should be an integer."
+        elif not isInt(request.POST['matches-year2']):
+            errorMessage = "Invalid matches played 1 season ago entered. This should be an integer."
+        elif not isInt(request.POST['goals-year2']):
+            errorMessage = "Invalid goals scored 1 season ago entered. This should be an integer."
+
         return render(request, 'createPlayerProfile.html', {"playerName": "", "playerPosition": "", "playerHeight": 0,
                                 "matchesYear1": 0, "goalsYear1": 0, "matchesYear2": 0, "goalsYear2": 0,
-                                "playerAttributes": [], "recommendedModel": "", "predictionModelsList": []})
+                                "playerAttributes": [], "recommendedModel": "", "predictionModelsList": [],
+                                "errorMessage": errorMessage})
 
     players_raw_df = pd.read_csv('../inputs/raw_data.csv')
     playerAttributes = []

@@ -35,12 +35,24 @@
                 </div>
             </form>
 
+            {% if errorMessage%}
+
+            <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm">
+                <ul class="navbar-nav" style="padding-left: 0px; margin: 0px;">
+                     <li class="nav-item"> Input error exception</li>
+                 </ul>
+            </div>
+
+            {%else%}
+
             <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm">
                 <ul class="navbar-nav" style="padding-left: 0px; margin: 0px;">
                     {%csrf_token%}
                      <li class="nav-item" value = "{{playerName}}"> {{playerName}}'s Profile</li>
                  </ul>
             </div>
+
+            {%endif%}
 
             <form class="row justify-content-center align-items-center" action="/playerSearchResult/" method = "POST">
                 <div class="search-bar" style="padding-left: 110px; margin: 0px; float:bottom; width: 100%">
@@ -57,6 +69,16 @@
             </div>
 
         </nav>
+
+        {% if errorMessage%}
+
+        <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
+            <ul class="navbar-nav" style="padding-left: 30px; margin: 0px; height: 80px;">
+                <a class="nav-item align-items-center" style="text-color:black; padding-left: 250px; margin: 30px; padding-right: 220px;">{{errorMessage}}</a>
+            </ul>
+        </div>
+
+        {%else%}
 
         <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
 
@@ -116,6 +138,8 @@
                 </div>
             {%endfor%}
         </form>
+
+        {%endif%}
 
     </body>
 
