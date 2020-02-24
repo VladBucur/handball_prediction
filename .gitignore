@@ -82,9 +82,10 @@ venv.bak/
 *.xls
 *.xlsx
 
-# Word and PDF documents
+# Word, PDF and PPTX documents
 *.docx
 *.pdf
+*.pptx
 
 # Jars
 *.jar
@@ -95,6 +96,7 @@ venv.bak/
 # Images
 *.jpeg
 *.png
+*.jpg
 
 # Pickle files
 *.pkl
@@ -102,4 +104,6 @@ venv.bak/
 # NN files
 *.hdf5
 *.json
+*.gif
+
 
