@@ -4,7 +4,7 @@
 
     <head>
 
-        <title>Player Profile</title>
+        <title>Player Future Prediction</title>
 
         <meta charset="UTF-8">
 
@@ -35,12 +35,24 @@
                 </div>
             </form>
 
+            {% if errorMessage%}
+
+            <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm">
+                <ul class="navbar-nav" style="padding-left: 0px; margin: 0px;">
+                     <li class="nav-item"> Input error exception</li>
+                 </ul>
+            </div>
+
+            {%else%}
+
             <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm">
                 <ul class="navbar-nav" style="padding-left: 0px; margin: 0px;">
                     {%csrf_token%}
                      <li class="nav-item" value = "{{playerName}}"> {{playerName}}'s Profile</li>
                  </ul>
             </div>
+
+            {%endif%}
 
             <form class="row justify-content-center align-items-center" action="/playerSearchResult/" method = "POST">
                 <div class="search-bar" style="padding-left: 110px; margin: 0px; float:bottom; width: 100%">
@@ -58,49 +70,76 @@
 
         </nav>
 
+        {% if errorMessage%}
+
         <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
-                <ul class="navbar-nav" style="padding-left: 30px; margin: 0px;">
-                     <a class="nav-item" style="text-color:black">Select prediction season</a>
-                </ul>
+            <ul class="navbar-nav" style="padding-left: 30px; margin: 0px; height: 80px;">
+                <a class="nav-item align-items-center" style="text-color:black; padding-left: 250px; margin: 30px; padding-right: 220px;">{{errorMessage}}</a>
+            </ul>
         </div>
 
-        <form action="/playerPrediction/" method = "POST">
-            {%csrf_token%}
-            {% for season in predictionSeasonList%}
+        {%else%}
+
+        <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
+
+                <ul class="navbar-nav" style="padding-left: 30px; margin: 0px; height: 80px;">
+                     <a class="nav-item" style="text-color:black">Player attributes</a>
+                </ul>
+
+                {%csrf_token%}
+                {% for attribute in playerAttributes%}
+                    <a class="nav-item" style="text-color:black; padding-left: 100px;">{{attribute}}</a>
+                {%endfor%}
                 <br>
-                <div class="prediction-season-button" name="prediction-season" style="padding-left: 33%">
-                    <input type="hidden" name="player-name" value="{{playerName}}"/>
-                    <button class="btn btn-season form-control" style="padding-top: 2%; padding-bottom: 4%; background-color: white; font-size:2.7vh; width: 50%;" type = "submit" name = "prediction-season" value = "{{season}}">
-                        <i class="em em-handball"></i>{{season}}
+
+        </div>
+
+        <br>
+
+        <form action="/playerFuturePredictionResult/" method = "POST">
+            <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
+                {%csrf_token%}
+                <input type="hidden" name="player-name" value="{{playerName}}"/>
+                <input type="hidden" name="position" value="{{playerPosition}}"/>
+                <input type="hidden" name="height" value="{{playerHeight}}"/>
+                <input type="hidden" name="matches-year1" value="{{matchesYear1}}"/>
+                <input type="hidden" name="goals-year1" value="{{goalsYear1}}"/>
+                <input type="hidden" name="matches-year2" value="{{matchesYear2}}"/>
+                <input type="hidden" name="goals-year2" value="{{goalsYear2}}"/>
+                <button class="btn btn-model form-control" style="padding-top: 2%; padding-bottom: 4%; background-color: white; font-size:2.7vh; width: 100%;" type = "submit" name = "prediction-model" value="{{recommendedModel}}">
+                    <i class="em em-handball"></i>Recommended model: {{recommendedModel}}
+                </button>
+            </div>
+        </form>
+
+        <br>
+
+        <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
+            <ul class="navbar-nav" style="padding-left: 30px; margin: 0px;">
+                 <a class="nav-item" style="text-color:black">Select prediction model</a>
+            </ul>
+        </div>
+
+        <form action="/playerFuturePredictionResult/" method = "POST">
+            {%csrf_token%}
+            <input type="hidden" name="player-name" value="{{playerName}}"/>
+            <input type="hidden" name="position" value="{{playerPosition}}"/>
+            <input type="hidden" name="height" value="{{playerHeight}}"/>
+            <input type="hidden" name="matches-year1" value="{{matchesYear1}}"/>
+            <input type="hidden" name="goals-year1" value="{{goalsYear1}}"/>
+            <input type="hidden" name="matches-year2" value="{{matchesYear2}}"/>
+            <input type="hidden" name="goals-year2" value="{{goalsYear2}}"/>
+            {% for model in predictionModelsList%}
+                <br>
+                <div class="prediction-model-button" style="padding-left: 33%">
+                    <button class="btn btn-model form-control" style="padding-top: 2%; padding-bottom: 4%; background-color: white; font-size:2.7vh; width: 50%;" type = "submit" name = "prediction-model" value = "{{model}}">
+                        <i class="em em-handball"></i>{{model}}
                     </button>
                 </div>
             {%endfor%}
         </form>
 
-        <br>
-
-        <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
-                <ul class="navbar-nav" style="padding-left: 30px; margin: 0px;">
-                     <a class="nav-item" style="text-color:black">Select below season to predict the future</a>
-                </ul>
-        </div>
-
-        <br>
-
-        <form action="/playerFuturePredictionInputData/" method = "POST">
-            {%csrf_token%}
-            <div class="prediction-season-button" style="padding-left: 33%">
-
-                <input type="hidden" name="player-name" value="{{playerName}}"/>
-                <input type="hidden" name="position" value="{{playerPosition}}"/>
-                <input type="hidden" name="height" value="{{playerHeight}}"/>
-
-                <button class="btn btn-season form-control" style="padding-top: 2%; padding-bottom: 4%; background-color: white; font-size:2.7vh; width: 50%;" type = "submit">
-                    <i class="em em-handball"></i>2020/2021
-                </button>
-
-            </div>
-        </form>
+        {%endif%}
 
     </body>
 

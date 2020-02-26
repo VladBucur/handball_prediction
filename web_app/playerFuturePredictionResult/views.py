@@ -3,8 +3,7 @@ from keras.models import model_from_json
 import pandas as pd
 import pickle
 
-
-def createdPlayerPredictionResultView(request):
+def futurePredictionResultView(request):
 
     try:
         playerName = request.POST['player-name']
@@ -16,11 +15,11 @@ def createdPlayerPredictionResultView(request):
         goalsYear2 = request.POST['goals-year2']
         predictionModel = request.POST['prediction-model']
     except:
-        return render(request, 'createdPlayerPredictionResult.html', {"playerName": "", "predictionModel": "",
+        return render(request, 'playerFuturePredictionResult.html', {"playerName": "", "predictionModel": "",
                                                         "predictedValue": "",  "predictionModelDocumentationLink": ""})
 
-    df = pd.DataFrame(columns = ['center', 'back', 'wing', 'line', 'height', 'matches_year1', 'goals_year1',
-                                 'goals_per_match_year1', 'matches_year2', 'goals_year2', 'goals_per_match_year2'])
+    df = pd.DataFrame(columns=['center', 'back', 'wing', 'line', 'height', 'matches_year1', 'goals_year1',
+                               'goals_per_match_year1', 'matches_year2', 'goals_year2', 'goals_per_match_year2'])
 
     center = 0
     back = 0
@@ -39,10 +38,10 @@ def createdPlayerPredictionResultView(request):
     goals_per_match_year1 = float(goalsYear1) / float(matchesYear1)
     goals_per_match_year2 = float(goalsYear2) / float(matchesYear2)
 
-    df = df.append({'center':center, 'back':back, 'wing':wing, 'line':line, 'height':int(playerHeight),
-                    'matches_year1':int(matchesYear1), 'goals_year1':int(goalsYear1),
-                    'goals_per_match_year1':goals_per_match_year1, 'matches_year2':int(matchesYear2),
-                    'goals_year2':int(goalsYear2), 'goals_per_match_year2':goals_per_match_year2}, ignore_index=True)
+    df = df.append({'center': center, 'back': back, 'wing': wing, 'line': line, 'height': int(playerHeight),
+                    'matches_year1': int(matchesYear1), 'goals_year1': int(goalsYear1),
+                    'goals_per_match_year1': goals_per_match_year1, 'matches_year2': int(matchesYear2),
+                    'goals_year2': int(goalsYear2), 'goals_per_match_year2': goals_per_match_year2}, ignore_index=True)
 
     X = df[['center', 'back', 'wing', 'line', 'height', 'matches_year1', 'goals_year1', 'goals_per_match_year1',
             'matches_year2', 'goals_year2', 'goals_per_match_year2']]
@@ -104,5 +103,6 @@ def createdPlayerPredictionResultView(request):
     modelLinks[
         'Random Forest Classifier'] = 'https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html'
 
-    return render(request, 'createdPlayerPredictionResult.html', {"playerName": playerName, "predictionModel": predictionModel,
-                            "predictedValue": predictedValue, "predictionModelDocumentationLink": modelLinks[predictionModel]})
+    return render(request, 'playerFuturePredictionResult.html',
+                  {"playerName": playerName, "predictionModel": predictionModel,
+                   "predictedValue": predictedValue, "predictionModelDocumentationLink": modelLinks[predictionModel]})

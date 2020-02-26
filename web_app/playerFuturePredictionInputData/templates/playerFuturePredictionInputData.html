@@ -4,7 +4,7 @@
 
     <head>
 
-        <title>Player Profile</title>
+        <title>Player Future Prediction Input Data</title>
 
         <meta charset="UTF-8">
 
@@ -21,7 +21,7 @@
 
     </head>
 
-    <body style="background-color:lightgrey;">
+    <body>
 
         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
 
@@ -58,48 +58,39 @@
 
         </nav>
 
-        <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
-                <ul class="navbar-nav" style="padding-left: 30px; margin: 0px;">
-                     <a class="nav-item" style="text-color:black">Select prediction season</a>
-                </ul>
-        </div>
-
-        <form action="/playerPrediction/" method = "POST">
-            {%csrf_token%}
-            {% for season in predictionSeasonList%}
-                <br>
-                <div class="prediction-season-button" name="prediction-season" style="padding-left: 33%">
-                    <input type="hidden" name="player-name" value="{{playerName}}"/>
-                    <button class="btn btn-season form-control" style="padding-top: 2%; padding-bottom: 4%; background-color: white; font-size:2.7vh; width: 50%;" type = "submit" name = "prediction-season" value = "{{season}}">
-                        <i class="em em-handball"></i>{{season}}
-                    </button>
-                </div>
-            {%endfor%}
-        </form>
-
         <br>
 
-        <div class="navbar-collapse justify-content-end align-items-center" id="collapsingNavbarSm" style="background-color:white">
-                <ul class="navbar-nav" style="padding-left: 30px; margin: 0px;">
-                     <a class="nav-item" style="text-color:black">Select below season to predict the future</a>
-                </ul>
-        </div>
+        <form action="/playerFuturePrediction/" method = "POST" class = "align-items-center">
 
-        <br>
-
-        <form action="/playerFuturePredictionInputData/" method = "POST">
             {%csrf_token%}
-            <div class="prediction-season-button" style="padding-left: 33%">
 
-                <input type="hidden" name="player-name" value="{{playerName}}"/>
-                <input type="hidden" name="position" value="{{playerPosition}}"/>
-                <input type="hidden" name="height" value="{{playerHeight}}"/>
+            <input type="hidden" name="player-name" value="{{playerName}}"/>
+            <input type="hidden" name="position" value="{{playerPosition}}"/>
+            <input type="hidden" name="height" value="{{playerHeight}}"/>
 
-                <button class="btn btn-season form-control" style="padding-top: 2%; padding-bottom: 4%; background-color: white; font-size:2.7vh; width: 50%;" type = "submit">
-                    <i class="em em-handball"></i>2020/2021
-                </button>
+            <a class="nav-item" style="text-color:black; padding-left: 400px; padding-right: 29px;">Matches played 2 seasons ago:</a>
+            <input type="text" id="matches-year1" name="matches-year1" style="">
 
-            </div>
+            <br><br>
+
+            <a class="nav-item" style="text-color:black; padding-left: 400px; padding-right: 54px;">Goals scored 2 seasons ago:</a>
+            <input type="text" id="goals-year1" name="goals-year1" style="">
+
+            <br><br>
+
+            <a class="nav-item" style="text-color:black; padding-left: 400px; padding-right: 40px;">Matches played 1 season ago:</a>
+            <input type="text" id="matches-year2" name="matches-year2" style="">
+
+            <br><br>
+
+            <a class="nav-item" style="text-color:black; padding-left: 400px; padding-right: 54px;">Goals scored 1 seasons ago:</a>
+            <input type="text" id="goals-year2" name="goals-year2" style="">
+
+            <br><br>
+
+            <a class="nav-item" style="text-color:black; padding-left: 400px; padding-right: 54px;"></a>
+            <input type="submit" value="Submit" style="padding-left: 200px; padding-right: 200px;">
+
         </form>
 
     </body>
