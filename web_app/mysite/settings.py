@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'playerSearch',
     'playerProfile',
     'playerPrediction',
+    'playerFuturePredictionInputData',
+    'playerFuturePrediction',
+    'playerFuturePredictionResult',
     'predictionResult',
     'stats'
 ]

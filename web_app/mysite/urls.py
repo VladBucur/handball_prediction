@@ -23,6 +23,9 @@ from createdPlayerPredictionResult.views import createdPlayerPredictionResultVie
 from playerSearch.views import searchView
 from playerProfile.views import profileView
 from playerPrediction.views import predictionView
+from playerFuturePredictionInputData.views import futurePredictionInputDataView
+from playerFuturePrediction.views import futurePredictionView
+from playerFuturePredictionResult.views import futurePredictionResultView
 from predictionResult.views import predictionResultView
 from stats.views import statsView
 
@@ -34,6 +37,9 @@ urlpatterns = [
     re_path(r'^playerSearch.*$', searchView, name='playerSearch'),
     re_path(r'^playerProfile.*$', profileView, name='playerProfile'),
     re_path(r'^playerPrediction.*$', predictionView, name='playerPrediction'),
+    re_path(r'^playerFuturePredictionInputData.*$', futurePredictionInputDataView, name='playerFuturePredictionInputData'),
+    re_path(r'^playerFuturePredictionResult.*$', futurePredictionResultView, name='playerFuturePredictionResult'),
+    re_path(r'^playerFuturePrediction.*$', futurePredictionView, name='playerFuturePrediction'),
     re_path(r'^predictionResult.*$', predictionResultView, name='predictionResult'),
     re_path(r'^stats.*$', statsView, name='stats'),
     path('admin/', admin.site.urls)
